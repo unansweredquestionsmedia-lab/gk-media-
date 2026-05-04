@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GK Media — Narrative That Connects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-dim: #8a6f2e;
+    --gold-pale: #e8d5a3;
+    --ink: #0a0a0a;
+    --ink-mid: #111111;
+    --ink-soft: #1a1a1a;
+    --paper: #f4f0e8;
+    --paper-warm: #ede8dc;
+    --text-main: #e8e4dc;
+    --text-muted: #9a9490;
+    --text-dim: #6a6662;
+    --rule: rgba(201,168,76,0.18);
+    --rule-strong: rgba(201,168,76,0.4);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--text-main);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 48px 80px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 60%);
+  }
+
+  .hero-rule-left {
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 180px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+  }
+
+  .hero-inner {
+    position: relative;
+    text-align: center;
+    max-width: 820px;
+  }
+
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--text-main);
+    margin-bottom: 8px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-pale);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    margin-bottom: 48px;
+    margin-top: 16px;
+  }
+
+  .hero-claim {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    max-width: 520px;
+    margin: 0 auto 56px;
+    line-height: 1.9;
+  }
+
+  .hero-claim strong {
+    color: var(--text-main);
+    font-weight: 400;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    padding: 14px 36px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-pale);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold-dim);
+    padding: 14px 36px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold-pale);
+    transform: translateY(-1px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    animation: nudge 2.5s ease-in-out infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 36px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    padding: 100px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.1;
+    color: var(--text-main);
+    margin-bottom: 24px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold-pale);
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    margin-top: 48px;
+  }
+
+  .lang-column {
+    padding: 32px 0;
+  }
+
+  .lang-column:first-child {
+    border-right: 1px solid var(--rule);
+    padding-right: 48px;
+  }
+
+  .lang-column:last-child {
+    padding-left: 48px;
+  }
+
+  .lang-col-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+
+  .lang-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .lang-tag {
+    border: 1px solid var(--rule-strong);
+    padding: 6px 14px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+    cursor: default;
+  }
+
+  .lang-tag:hover {
+    border-color: var(--gold);
+    color: var(--gold-pale);
+  }
+
+  .lang-tag.rare {
+    border-style: dashed;
+    color: var(--text-dim);
+  }
+
+  .lang-tag.rare:hover {
+    border-color: var(--gold-dim);
+    color: var(--text-muted);
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    margin-top: 48px;
+    border: 1px solid var(--rule);
+  }
+
+  .pricing-card {
+    background: var(--ink);
+    padding: 36px 28px;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .pricing-card:hover {
+    background: var(--ink-soft);
+  }
+
+  .pricing-card.featured {
+    background: var(--ink-mid);
+  }
+
+  .pricing-card.featured::before {
+    content: 'POPULAR';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    padding: 3px 12px;
+  }
+
+  .pricing-tier {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .pricing-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text-main);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-amount.free {
+    color: var(--gold-pale);
+  }
+
+  .pricing-period {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  .pricing-rule {
+    width: 24px;
+    height: 1px;
+    background: var(--gold-dim);
+    margin-bottom: 20px;
+  }
+
+  .pricing-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ── HOW WE WORK ── */
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 48px;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: calc(12.5% + 16px);
+    right: calc(12.5% + 16px);
+    height: 1px;
+    background: linear-gradient(to right, var(--gold-dim), var(--gold), var(--gold-dim));
+  }
+
+  .step {
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--gold);
+    margin: 0 auto 24px;
+    background: var(--ink);
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 12px;
+  }
+
+  .step-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  /* ── TRIAL BAND ── */
+  .trial-band {
+    background: var(--ink-mid);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 64px 48px;
+    text-align: center;
+  }
+
+  .trial-band p {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.9;
+  }
+
+  /* ── CONTACT ── */
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-detail {
+    margin-bottom: 20px;
+  }
+
+  .contact-detail-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .contact-detail-value {
+    font-size: 13px;
+    color: var(--text-main);
+  }
+
+  .contact-detail-value a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-detail-value a:hover {
+    color: var(--gold-pale);
+  }
+
+  .contact-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.5;
+    border-left: 1px solid var(--gold-dim);
+    padding-left: 28px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 40px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-align: center;
+    max-width: 420px;
+  }
+
+  .footer-disclaimer {
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-align: right;
+    max-width: 260px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  .fade-up:nth-child(1) { animation-delay: 0.1s; }
+  .fade-up:nth-child(2) { animation-delay: 0.25s; }
+  .fade-up:nth-child(3) { animation-delay: 0.4s; }
+  .fade-up:nth-child(4) { animation-delay: 0.55s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 64px 24px; }
+    .lang-grid { grid-template-columns: 1fr; }
+    .lang-column:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 32px; }
+    .lang-column:last-child { padding-left: 0; padding-top: 32px; }
+    .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .process-steps::before { display: none; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
+    .footer-disclaimer { text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">GK Media</a>
+  <ul class="nav-links">
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-rule-left"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow fade-up">Narrative That Connects</div>
+    <h1 class="hero-title fade-up">Technical Content.<br><em>Any Language.</em><br>48 Hours.</h1>
+    <p class="hero-tagline fade-up">Documentary scripts. B2B content. Multilingual production.</p>
+    <p class="hero-claim fade-up">
+      We do not translate.<br>
+      We <strong>create directly</strong> in 15+ languages — including rare variants.<br>
+      Human-directed. Source-backed. Ready to publish.
+    </p>
+    <div class="hero-ctas fade-up">
+      <a href="mailto:research@gkmedia.online?subject=Free Trial Request" class="btn-primary">Start Free Trial</a>
+      <a href="mailto:research@gkmedia.online?subject=Sample Request" class="btn-ghost">Request Sample</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-label reveal">Languages</div>
+  <h2 class="section-title reveal">Direct creation,<br><em>not translation.</em></h2>
+  <div class="lang-grid reveal">
+    <div class="lang-column">
+      <div class="lang-col-label">Standard</div>
+      <div class="lang-list">
+        <span class="lang-tag">English</span>
+        <span class="lang-tag">German</span>
+        <span class="lang-tag">Dutch</span>
+        <span class="lang-tag">Flemish</span>
+        <span class="lang-tag">French (Parisian)</span>
+        <span class="lang-tag">French (Québec)</span>
+        <span class="lang-tag">Spanish (EU)</span>
+        <span class="lang-tag">Spanish (LATAM)</span>
+        <span class="lang-tag">Portuguese (EU)</span>
+        <span class="lang-tag">Portuguese (BR)</span>
+        <span class="lang-tag">Hindi</span>
+        <span class="lang-tag">Japanese</span>
+        <span class="lang-tag">Mandarin</span>
+        <span class="lang-tag">Arabic</span>
+        <span class="lang-tag">Swahili</span>
+        <span class="lang-tag">Norwegian</span>
+      </div>
+    </div>
+    <div class="lang-column">
+      <div class="lang-col-label">Rare & Minority</div>
+      <div class="lang-list">
+        <span class="lang-tag rare">Swiss German</span>
+        <span class="lang-tag rare">West Frisian</span>
+        <span class="lang-tag rare">Haitian Creole</span>
+        <span class="lang-tag rare">Lombard</span>
+        <span class="lang-tag rare">Sanskrit (Classical)</span>
+        <span class="lang-tag rare">Hinglish</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-label reveal">Pricing</div>
+  <h2 class="section-title reveal">Clear investment.<br><em>No hidden scope.</em></h2>
+  <div class="pricing-grid reveal">
+    <div class="pricing-card">
+      <div class="pricing-tier">Trial</div>
+      <div class="pricing-amount free">Free</div>
+      <div class="pricing-period">No obligation</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">500 words, one language. Delivered within 48 hours. No strings attached.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Standard</div>
+      <div class="pricing-amount">$700<span style="font-size:18px">–900</span></div>
+      <div class="pricing-period">Per commission</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Full production bundle in one language. Script, source basis, derivatives, rights note.</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Multilingual</div>
+      <div class="pricing-amount">$1,200<span style="font-size:18px">–2,000</span></div>
+      <div class="pricing-period">Up to 3 languages</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Full bundle across three language markets. Same narrative, distinct creation for each.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Retainer</div>
+      <div class="pricing-amount">$3k<span style="font-size:18px">–10k</span></div>
+      <div class="pricing-period">Per month</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Ongoing pipeline. Priority turnaround. Dedicated editorial capacity.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRIAL BAND -->
+<div class="trial-band reveal">
+  <p>No obligation. Email us your topic and target language.<br>We deliver within 48 hours — free.</p>
+  <a href="mailto:research@gkmedia.online?subject=Free Trial Request" class="btn-primary">Start Free Trial →</a>
+</div>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-label reveal">Process</div>
+  <h2 class="section-title reveal">Four steps.<br><em>48 hours.</em></h2>
+  <div class="process-steps reveal">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Brief</div>
+      <div class="step-desc">Topic, language, audience, and format. We scope it in one exchange.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Production</div>
+      <div class="step-desc">Research, sourcing, and direct creation. Not translated from a master draft.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Review</div>
+      <div class="step-desc">Editorial and factual pass. Claim table checked. Production notes attached.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Delivery</div>
+      <div class="step-desc">Full bundle delivered within 48 hours. Client-ready, not a draft.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Contact</div>
+  <div class="contact-inner reveal">
+    <div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Name</div>
+        <div class="contact-detail-value">Karan Kohli</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Title</div>
+        <div class="contact-detail-value">Editorial Director, GK Media</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value"><a href="mailto:research@gkmedia.online">research@gkmedia.online</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Website</div>
+        <div class="contact-detail-value"><a href="https://gkmedia.online" target="_blank">gkmedia.online</a></div>
+      </div>
+    </div>
+    <div class="contact-note">
+      For samples, trial packages, or commissions — one email is all it takes. We respond within the business day.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">GK Media</div>
+  <div class="footer-copy">
+    Human-directed. Source-backed. Narrative content.<br>
+    © 2026 GK Media. All rights reserved.
+  </div>
+  <div class="footer-disclaimer">
+    Content involving legal, medical, financial, or regulated topics should be reviewed by the client's qualified subject-matter expert before publication.
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
