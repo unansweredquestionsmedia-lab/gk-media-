@@ -10,19 +10,19 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --gold: #c9a84c;
-    --gold-dim: #8a6f2e;
-    --gold-pale: #e8d5a3;
-    --ink: #0a0a0a;
-    --ink-mid: #111111;
-    --ink-soft: #1a1a1a;
-    --paper: #f4f0e8;
-    --paper-warm: #ede8dc;
-    --text-main: #e8e4dc;
-    --text-muted: #9a9490;
-    --text-dim: #6a6662;
-    --rule: rgba(201,168,76,0.18);
-    --rule-strong: rgba(201,168,76,0.4);
+    --gold: #8a5e0a;
+    --gold-dim: #b07d1a;
+    --gold-pale: #5a3d06;
+    --ink: #faf8f3;
+    --ink-mid: #f0ebe0;
+    --ink-soft: #e8e2d6;
+    --paper: #faf8f3;
+    --paper-warm: #f0ebe0;
+    --text-main: #18140e;
+    --text-muted: #4a4238;
+    --text-dim: #7a7268;
+    --rule: rgba(138,94,10,0.12);
+    --rule-strong: rgba(138,94,10,0.28);
   }
 
   html { scroll-behavior: smooth; }
@@ -32,7 +32,7 @@
     color: var(--text-main);
     font-family: 'DM Mono', monospace;
     font-weight: 300;
-    font-size: 13px;
+    font-size: 15.6px;
     line-height: 1.7;
     letter-spacing: 0.01em;
     overflow-x: hidden;
@@ -58,7 +58,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 48px;
-    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(250,248,243,0.97) 0%, transparent 100%);
     backdrop-filter: blur(2px);
   }
 
@@ -81,7 +81,7 @@
   .nav-links a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     transition: color 0.2s;
@@ -102,9 +102,59 @@
   .hero-bg {
     position: absolute;
     inset: 0;
+    overflow: hidden;
+  }
+
+  /* aged paper base */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 30% at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 60%);
+      radial-gradient(ellipse 80% 60% at 50% 50%, #f5edd8 0%, #e8d9b8 50%, #d4c49a 100%);
+  }
+
+  /* ruled lines like a notepad */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 31px,
+        rgba(100,130,180,0.12) 31px,
+        rgba(100,130,180,0.12) 32px
+      ),
+      linear-gradient(
+        to right,
+        rgba(210,80,80,0.18) 0px,
+        rgba(210,80,80,0.18) 1px,
+        transparent 1px,
+        transparent 100%
+      );
+    background-size: 100% 32px, 100% 100%;
+    background-position: 0 48px, 72px 0;
+  }
+
+  /* script text overlay — SVG encoded handwriting lines */
+  .hero-script-overlay {
+    position: absolute;
+    inset: 0;
+    opacity: 0.13;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cstyle%3Epath%7Bfill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round%7D%3C/style%3E%3Cpath d='M80 60 Q120 55 160 62 Q200 58 240 64' stroke-width='1.8'/%3E%3Cpath d='M80 92 Q140 88 200 94 Q260 90 320 96 Q380 91 440 97' stroke-width='1.8'/%3E%3Cpath d='M80 124 Q160 120 240 126 Q300 122 360 128 Q420 123 480 129 Q520 125 560 130' stroke-width='1.8'/%3E%3Cpath d='M80 156 Q170 152 260 158 Q340 154 420 160 Q480 156 540 162 Q600 157 660 163 Q720 159 780 164' stroke-width='1.8'/%3E%3Cpath d='M80 188 Q180 184 280 190 Q360 186 440 192 Q520 188 600 193 Q660 189 720 194' stroke-width='1.8'/%3E%3Cpath d='M80 220 Q200 216 320 222 Q420 218 520 224 Q600 220 680 225 Q740 221 800 226' stroke-width='1.8'/%3E%3Cpath d='M80 252 Q220 248 360 254 Q460 250 560 255 Q640 251 720 257' stroke-width='1.8'/%3E%3Cpath d='M80 284 Q240 280 400 286 Q500 282 600 288 Q680 284 760 289' stroke-width='1.8'/%3E%3Cpath d='M80 316 Q260 312 440 318 Q540 314 640 320 Q720 316 800 321' stroke-width='1.8'/%3E%3Cpath d='M80 348 Q280 344 480 350 Q580 346 680 352 Q750 348 820 353' stroke-width='1.8'/%3E%3Cpath d='M80 380 Q300 376 520 382 Q620 378 720 383' stroke-width='1.8'/%3E%3Cpath d='M80 412 Q320 408 560 414 Q660 410 760 415' stroke-width='1.8'/%3E%3Cpath d='M80 444 Q340 440 600 446 Q700 442 800 447' stroke-width='1.8'/%3E%3Cpath d='M80 476 Q360 472 640 478 Q720 474 800 479' stroke-width='1.8'/%3E%3Cpath d='M80 508 Q380 504 680 510 Q740 506 800 511' stroke-width='1.8'/%3E%3C/svg%3E");
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* vignette + content fade */
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 50%, rgba(245,237,216,0.0) 30%, rgba(212,196,154,0.55) 100%),
+      linear-gradient(to bottom, rgba(245,237,216,0.3) 0%, rgba(245,237,216,0.0) 30%, rgba(245,237,216,0.0) 70%, rgba(212,196,154,0.5) 100%);
   }
 
   .hero-rule-left {
@@ -124,10 +174,10 @@
   }
 
   .hero-eyebrow {
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: #8a5e0a;
     margin-bottom: 28px;
     display: flex;
     align-items: center;
@@ -141,7 +191,7 @@
     display: block;
     width: 40px;
     height: 1px;
-    background: var(--gold-dim);
+    background: #b07d1a;
   }
 
   .hero-title {
@@ -150,28 +200,28 @@
     font-size: clamp(52px, 7vw, 96px);
     line-height: 1.0;
     letter-spacing: -0.01em;
-    color: var(--text-main);
+    color: #18140e;
     margin-bottom: 8px;
   }
 
   .hero-title em {
     font-style: italic;
-    color: var(--gold-pale);
+    color: #7a4f08;
   }
 
   .hero-tagline {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-size: 18px;
-    color: var(--text-dim);
+    color: #4a3a20;
     letter-spacing: 0.08em;
     margin-bottom: 48px;
     margin-top: 16px;
   }
 
   .hero-claim {
-    font-size: 12px;
-    color: var(--text-muted);
+    font-size: 14px;
+    color: #3a3020;
     letter-spacing: 0.05em;
     max-width: 520px;
     margin: 0 auto 56px;
@@ -179,7 +229,7 @@
   }
 
   .hero-claim strong {
-    color: var(--text-main);
+    color: #18140e;
     font-weight: 400;
   }
 
@@ -192,11 +242,11 @@
 
   .btn-primary {
     background: var(--gold);
-    color: var(--ink);
+    color: #faf8f3;
     border: none;
     padding: 14px 36px;
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -217,7 +267,7 @@
     border: 1px solid var(--gold-dim);
     padding: 14px 36px;
     font-family: 'DM Mono', monospace;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -243,7 +293,7 @@
     align-items: center;
     gap: 8px;
     color: var(--text-dim);
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     animation: nudge 2.5s ease-in-out infinite;
@@ -270,7 +320,7 @@
   }
 
   .section-label {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gold);
@@ -332,7 +382,7 @@
   }
 
   .lang-col-label {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold-dim);
@@ -348,7 +398,7 @@
   .lang-tag {
     border: 1px solid var(--rule-strong);
     padding: 6px 14px;
-    font-size: 10px;
+    font-size: 14px;
     letter-spacing: 0.1em;
     color: var(--text-muted);
     transition: border-color 0.2s, color 0.2s;
@@ -411,7 +461,7 @@
   .pricing-tier {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
@@ -432,7 +482,7 @@
   }
 
   .pricing-period {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.15em;
     color: var(--text-dim);
     margin-bottom: 24px;
@@ -446,7 +496,7 @@
   }
 
   .pricing-desc {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.8;
   }
@@ -490,12 +540,9 @@
     background: var(--ink);
     position: relative;
     z-index: 1;
-  }
-
-  .step-title {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--text-main);
@@ -503,7 +550,7 @@
   }
 
   .step-desc {
-    font-size: 11px;
+    font-size: 13px;
     color: var(--text-muted);
     line-height: 1.8;
   }
@@ -518,7 +565,7 @@
   }
 
   .trial-band p {
-    font-size: 12px;
+    font-size: 14px;
     color: var(--text-muted);
     margin-bottom: 28px;
     max-width: 480px;
@@ -540,7 +587,7 @@
   }
 
   .contact-detail-label {
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold-dim);
@@ -593,7 +640,7 @@
   }
 
   .footer-copy {
-    font-size: 10px;
+    font-size: 14px;
     color: var(--text-dim);
     letter-spacing: 0.05em;
     text-align: center;
@@ -601,7 +648,7 @@
   }
 
   .footer-disclaimer {
-    font-size: 9px;
+    font-size: 11px;
     color: var(--text-dim);
     letter-spacing: 0.05em;
     text-align: right;
@@ -674,7 +721,10 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg">
+    <div class="hero-script-overlay"></div>
+    <div class="hero-vignette"></div>
+  </div>
   <div class="hero-rule-left"></div>
   <div class="hero-inner">
     <div class="hero-eyebrow fade-up">Narrative That Connects</div>
@@ -686,8 +736,8 @@
       Human-directed. Source-backed. Ready to publish.
     </p>
     <div class="hero-ctas fade-up">
-      <a href="mailto:research@gkmedia.online?subject=Free Trial Request" class="btn-primary">Start Free Trial</a>
-      <a href="mailto:research@gkmedia.online?subject=Sample Request" class="btn-ghost">Request Sample</a>
+      <a href="mailto:research@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial</a>
+      <a href="https://drive.google.com/file/d/1HRyxN_MJoppKdcyYCivDJq6xPzxVwUXt/view" target="_blank" class="btn-ghost">Request Sample</a>
     </div>
   </div>
   <div class="scroll-hint">Scroll</div>
@@ -776,7 +826,7 @@
 <!-- TRIAL BAND -->
 <div class="trial-band reveal">
   <p>No obligation. Email us your topic and target language.<br>We deliver within 48 hours — free.</p>
-  <a href="mailto:research@gkmedia.online?subject=Free Trial Request" class="btn-primary">Start Free Trial →</a>
+  <a href="mailto:research@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial →</a>
 </div>
 
 <!-- PROCESS -->
