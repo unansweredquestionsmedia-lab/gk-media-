@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GK Media — Narrative That Connects</title>
+<title>GK Media — Technical Content. Any Language. 48 Hours.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -16,8 +16,6 @@
     --ink: #faf8f3;
     --ink-mid: #f0ebe0;
     --ink-soft: #e8e2d6;
-    --paper: #faf8f3;
-    --paper-warm: #f0ebe0;
     --text-main: #18140e;
     --text-muted: #4a4238;
     --text-dim: #7a7268;
@@ -32,13 +30,12 @@
     color: var(--text-main);
     font-family: 'DM Mono', monospace;
     font-weight: 300;
-    font-size: 15.6px;
+    font-size: 13px;
     line-height: 1.7;
     letter-spacing: 0.01em;
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY ── */
   body::before {
     content: '';
     position: fixed;
@@ -48,6 +45,10 @@
     z-index: 9999;
     opacity: 0.35;
   }
+
+  /* ── PAGE SYSTEM ── */
+  .page { display: none; }
+  .page.active { display: block; }
 
   /* ── NAV ── */
   nav {
@@ -70,24 +71,33 @@
     color: var(--gold);
     text-decoration: none;
     text-transform: uppercase;
+    cursor: pointer;
   }
 
   .nav-links {
     display: flex;
     gap: 36px;
     list-style: none;
+    align-items: center;
   }
 
-  .nav-links a {
+  .nav-links a, .nav-links button {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     transition: color 0.2s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 300;
   }
 
-  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover, .nav-links button:hover { color: var(--gold); }
+  .nav-links button.nav-active { color: var(--gold); border-bottom: 1px solid var(--gold-dim); padding-bottom: 2px; }
 
   /* ── HERO ── */
   .hero {
@@ -105,50 +115,33 @@
     overflow: hidden;
   }
 
-  /* aged paper base */
   .hero-bg::before {
     content: '';
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 50%, #f5edd8 0%, #e8d9b8 50%, #d4c49a 100%);
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, #f5edd8 0%, #e8d9b8 50%, #d4c49a 100%);
   }
 
-  /* ruled lines like a notepad */
   .hero-bg::after {
     content: '';
     position: absolute;
     inset: 0;
     background-image:
-      repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 31px,
-        rgba(100,130,180,0.12) 31px,
-        rgba(100,130,180,0.12) 32px
-      ),
-      linear-gradient(
-        to right,
-        rgba(210,80,80,0.18) 0px,
-        rgba(210,80,80,0.18) 1px,
-        transparent 1px,
-        transparent 100%
-      );
+      repeating-linear-gradient(to bottom, transparent 0px, transparent 31px, rgba(100,130,180,0.12) 31px, rgba(100,130,180,0.12) 32px),
+      linear-gradient(to right, rgba(210,80,80,0.18) 0px, rgba(210,80,80,0.18) 1px, transparent 1px, transparent 100%);
     background-size: 100% 32px, 100% 100%;
     background-position: 0 48px, 72px 0;
   }
 
-  /* script text overlay — SVG encoded handwriting lines */
   .hero-script-overlay {
     position: absolute;
     inset: 0;
     opacity: 0.13;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cstyle%3Epath%7Bfill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round%7D%3C/style%3E%3Cpath d='M80 60 Q120 55 160 62 Q200 58 240 64' stroke-width='1.8'/%3E%3Cpath d='M80 92 Q140 88 200 94 Q260 90 320 96 Q380 91 440 97' stroke-width='1.8'/%3E%3Cpath d='M80 124 Q160 120 240 126 Q300 122 360 128 Q420 123 480 129 Q520 125 560 130' stroke-width='1.8'/%3E%3Cpath d='M80 156 Q170 152 260 158 Q340 154 420 160 Q480 156 540 162 Q600 157 660 163 Q720 159 780 164' stroke-width='1.8'/%3E%3Cpath d='M80 188 Q180 184 280 190 Q360 186 440 192 Q520 188 600 193 Q660 189 720 194' stroke-width='1.8'/%3E%3Cpath d='M80 220 Q200 216 320 222 Q420 218 520 224 Q600 220 680 225 Q740 221 800 226' stroke-width='1.8'/%3E%3Cpath d='M80 252 Q220 248 360 254 Q460 250 560 255 Q640 251 720 257' stroke-width='1.8'/%3E%3Cpath d='M80 284 Q240 280 400 286 Q500 282 600 288 Q680 284 760 289' stroke-width='1.8'/%3E%3Cpath d='M80 316 Q260 312 440 318 Q540 314 640 320 Q720 316 800 321' stroke-width='1.8'/%3E%3Cpath d='M80 348 Q280 344 480 350 Q580 346 680 352 Q750 348 820 353' stroke-width='1.8'/%3E%3Cpath d='M80 380 Q300 376 520 382 Q620 378 720 383' stroke-width='1.8'/%3E%3Cpath d='M80 412 Q320 408 560 414 Q660 410 760 415' stroke-width='1.8'/%3E%3Cpath d='M80 444 Q340 440 600 446 Q700 442 800 447' stroke-width='1.8'/%3E%3Cpath d='M80 476 Q360 472 640 478 Q720 474 800 479' stroke-width='1.8'/%3E%3Cpath d='M80 508 Q380 504 680 510 Q740 506 800 511' stroke-width='1.8'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='600'%3E%3Cstyle%3Epath%7Bfill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round%7D%3C/style%3E%3Cpath d='M80 60 Q120 55 160 62 Q200 58 240 64' stroke-width='1.8'/%3E%3Cpath d='M80 92 Q140 88 200 94 Q260 90 320 96 Q380 91 440 97' stroke-width='1.8'/%3E%3Cpath d='M80 124 Q160 120 240 126 Q300 122 360 128 Q420 123 480 129 Q520 125 560 130' stroke-width='1.8'/%3E%3Cpath d='M80 156 Q170 152 260 158 Q340 154 420 160 Q480 156 540 162 Q600 157 660 163 Q720 159 780 164' stroke-width='1.8'/%3E%3Cpath d='M80 188 Q180 184 280 190 Q360 186 440 192 Q520 188 600 193 Q660 189 720 194' stroke-width='1.8'/%3E%3Cpath d='M80 220 Q200 216 320 222 Q420 218 520 224 Q600 220 680 225 Q740 221 800 226' stroke-width='1.8'/%3E%3Cpath d='M80 252 Q220 248 360 254 Q460 250 560 255 Q640 251 720 257' stroke-width='1.8'/%3E%3Cpath d='M80 284 Q240 280 400 286 Q500 282 600 288 Q680 284 760 289' stroke-width='1.8'/%3E%3Cpath d='M80 316 Q260 312 440 318 Q540 314 640 320 Q720 316 800 321' stroke-width='1.8'/%3E%3Cpath d='M80 348 Q280 344 480 350 Q580 346 680 352 Q750 348 820 353' stroke-width='1.8'/%3E%3Cpath d='M80 380 Q300 376 520 382 Q620 378 720 383' stroke-width='1.8'/%3E%3C/svg%3E");
     background-size: cover;
     background-position: center;
   }
 
-  /* vignette + content fade */
   .hero-vignette {
     position: absolute;
     inset: 0;
@@ -174,7 +167,7 @@
   }
 
   .hero-eyebrow {
-    font-size: 14px;
+    font-size: 10px;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: #8a5e0a;
@@ -185,8 +178,7 @@
     gap: 16px;
   }
 
-  .hero-eyebrow::before,
-  .hero-eyebrow::after {
+  .hero-eyebrow::before, .hero-eyebrow::after {
     content: '';
     display: block;
     width: 40px;
@@ -209,22 +201,43 @@
     color: #7a4f08;
   }
 
-  .hero-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: #4a3a20;
-    letter-spacing: 0.08em;
-    margin-bottom: 48px;
-    margin-top: 16px;
+  /* ── CREDIBILITY LINE ── */
+  .hero-credibility {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 24px auto 32px;
+    max-width: 680px;
+  }
+
+  .cred-item {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #5a3d06;
+    padding: 6px 18px;
+    position: relative;
+  }
+
+  .cred-item + .cred-item::before {
+    content: '·';
+    position: absolute;
+    left: -2px;
+    color: #b07d1a;
+    font-size: 14px;
+    line-height: 1;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .hero-claim {
-    font-size: 14px;
+    font-size: 12px;
     color: #3a3020;
     letter-spacing: 0.05em;
     max-width: 520px;
-    margin: 0 auto 56px;
+    margin: 0 auto 40px;
     line-height: 1.9;
   }
 
@@ -238,6 +251,15 @@
     gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+
+  .hero-ctas-secondary {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
   }
 
   .btn-primary {
@@ -246,7 +268,7 @@
     border: none;
     padding: 14px 36px;
     font-family: 'DM Mono', monospace;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -256,10 +278,7 @@
     display: inline-block;
   }
 
-  .btn-primary:hover {
-    background: var(--gold-pale);
-    transform: translateY(-1px);
-  }
+  .btn-primary:hover { background: var(--gold-pale); transform: translateY(-1px); }
 
   .btn-ghost {
     background: transparent;
@@ -267,7 +286,7 @@
     border: 1px solid var(--gold-dim);
     padding: 14px 36px;
     font-family: 'DM Mono', monospace;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -277,11 +296,21 @@
     display: inline-block;
   }
 
-  .btn-ghost:hover {
-    border-color: var(--gold);
-    color: var(--gold-pale);
-    transform: translateY(-1px);
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold-pale); transform: translateY(-1px); }
+
+  .btn-secondary-link {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule-strong);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
   }
+
+  .btn-secondary-link:hover { color: var(--gold); border-color: var(--gold-dim); }
 
   .scroll-hint {
     position: absolute;
@@ -293,7 +322,7 @@
     align-items: center;
     gap: 8px;
     color: var(--text-dim);
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     animation: nudge 2.5s ease-in-out infinite;
@@ -312,7 +341,7 @@
     50% { transform: translateX(-50%) translateY(6px); }
   }
 
-  /* ── SECTION BASE ── */
+  /* ── SECTIONS ── */
   section {
     padding: 100px 48px;
     max-width: 1100px;
@@ -320,7 +349,7 @@
   }
 
   .section-label {
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--gold);
@@ -347,10 +376,7 @@
     margin-bottom: 24px;
   }
 
-  .section-title em {
-    font-style: italic;
-    color: var(--gold-pale);
-  }
+  .section-title em { font-style: italic; color: var(--gold-pale); }
 
   .divider {
     width: 100%;
@@ -360,64 +386,168 @@
     margin: 0 auto;
   }
 
-  /* ── LANGUAGES ── */
-  .lang-grid {
+  /* ── POSITIONING BLOCK ── */
+  .positioning-block {
+    background: var(--ink-mid);
+    border-left: 2px solid var(--gold-dim);
+    padding: 40px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .positioning-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 800px;
+  }
+
+  /* ── HOW WE VERIFY ── */
+  .verify-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
     margin-top: 48px;
   }
 
-  .lang-column {
-    padding: 32px 0;
+  .verify-card {
+    background: var(--ink);
+    padding: 40px 32px;
+    transition: background 0.2s;
   }
 
-  .lang-column:first-child {
-    border-right: 1px solid var(--rule);
-    padding-right: 48px;
-  }
+  .verify-card:hover { background: var(--ink-mid); }
 
-  .lang-column:last-child {
-    padding-left: 48px;
-  }
-
-  .lang-col-label {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-dim);
+  .verify-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--rule-strong);
+    line-height: 1;
     margin-bottom: 20px;
   }
 
-  .lang-list {
+  .verify-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .verify-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+
+  /* ── LANGUAGES ── */
+  .lang-intro {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .lang-section-title {
+    font-size: 9px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 20px;
+    margin-top: 40px;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 12px;
+  }
+
+  .lang-list-full {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-bottom: 8px;
   }
 
   .lang-tag {
     border: 1px solid var(--rule-strong);
     padding: 6px 14px;
-    font-size: 14px;
+    font-size: 10px;
     letter-spacing: 0.1em;
     color: var(--text-muted);
     transition: border-color 0.2s, color 0.2s;
     cursor: default;
   }
 
-  .lang-tag:hover {
-    border-color: var(--gold);
-    color: var(--gold-pale);
-  }
+  .lang-tag:hover { border-color: var(--gold); color: var(--gold-pale); }
 
-  .lang-tag.rare {
+  .lang-tag.variant {
     border-style: dashed;
     color: var(--text-dim);
   }
 
-  .lang-tag.rare:hover {
-    border-color: var(--gold-dim);
+  .lang-tag.variant:hover { border-color: var(--gold-dim); color: var(--text-muted); }
+
+  .lang-note {
+    font-size: 10px;
+    color: var(--text-dim);
+    font-style: italic;
+    margin-top: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── VERIFIED VARIANTS ── */
+  .variant-table {
+    margin-top: 48px;
+    border: 1px solid var(--rule);
+  }
+
+  .variant-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+
+  .variant-row:last-child { border-bottom: none; }
+  .variant-row:hover { background: var(--ink-mid); }
+
+  .variant-lang {
+    padding: 20px 24px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-right: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+  }
+
+  .variant-anchor {
+    padding: 20px 24px;
+    font-size: 11px;
     color: var(--text-muted);
+    line-height: 1.7;
+    display: flex;
+    align-items: center;
+  }
+
+  .variant-anchor code {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-pale);
+    background: var(--ink-soft);
+    padding: 2px 8px;
+    margin-right: 8px;
   }
 
   /* ── PRICING ── */
@@ -437,16 +567,12 @@
     transition: background 0.2s;
   }
 
-  .pricing-card:hover {
-    background: var(--ink-soft);
-  }
+  .pricing-card:hover { background: var(--ink-soft); }
 
-  .pricing-card.featured {
-    background: var(--ink-mid);
-  }
+  .pricing-card.featured { background: var(--ink-mid); }
 
   .pricing-card.featured::before {
-    content: 'POPULAR';
+    content: 'MOST REQUESTED';
     position: absolute;
     top: -1px;
     left: 50%;
@@ -456,12 +582,13 @@
     font-size: 8px;
     letter-spacing: 0.2em;
     padding: 3px 12px;
+    white-space: nowrap;
   }
 
   .pricing-tier {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold);
@@ -477,12 +604,10 @@
     margin-bottom: 4px;
   }
 
-  .pricing-amount.free {
-    color: var(--gold-pale);
-  }
+  .pricing-amount.free { color: var(--gold-pale); }
 
   .pricing-period {
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 0.15em;
     color: var(--text-dim);
     margin-bottom: 24px;
@@ -496,12 +621,50 @@
   }
 
   .pricing-desc {
-    font-size: 13px;
+    font-size: 11px;
     color: var(--text-muted);
     line-height: 1.8;
   }
 
-  /* ── HOW WE WORK ── */
+  .pricing-note {
+    font-size: 10px;
+    color: var(--text-dim);
+    margin-top: 24px;
+    font-style: italic;
+    line-height: 1.7;
+    max-width: 640px;
+  }
+
+  .bundle-callout {
+    margin-top: 32px;
+    border: 1px solid var(--rule-strong);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+    background: var(--ink-mid);
+  }
+
+  .bundle-callout-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .bundle-callout-text strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  /* ── PROCESS ── */
   .process-steps {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -520,10 +683,7 @@
     background: linear-gradient(to right, var(--gold-dim), var(--gold), var(--gold-dim));
   }
 
-  .step {
-    padding: 0 20px;
-    text-align: center;
-  }
+  .step { padding: 0 20px; text-align: center; }
 
   .step-num {
     width: 40px;
@@ -533,24 +693,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--gold);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-main);
     margin: 0 auto 24px;
     background: var(--ink);
     position: relative;
     z-index: 1;
+  }
+
+  .step-title {
     font-family: 'Syne', sans-serif;
     font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.15em;
+    font-size: 10px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--text-main);
+    color: var(--gold);
     margin-bottom: 12px;
   }
 
   .step-desc {
-    font-size: 13px;
+    font-size: 11px;
     color: var(--text-muted);
     line-height: 1.8;
   }
@@ -565,13 +731,242 @@
   }
 
   .trial-band p {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--text-muted);
     margin-bottom: 28px;
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
     line-height: 1.9;
+  }
+
+  /* ── B2B PAGE ── */
+  .b2b-hero {
+    padding: 160px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .b2b-hero-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .b2b-hero-eyebrow::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .b2b-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.05;
+    color: var(--text-main);
+    margin-bottom: 32px;
+    max-width: 720px;
+  }
+
+  .b2b-title em { font-style: italic; color: var(--gold-pale); }
+
+  .b2b-lead {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    max-width: 620px;
+    margin-bottom: 48px;
+  }
+
+  .use-cases {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+  }
+
+  .use-case {
+    background: var(--ink);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+
+  .use-case:hover { background: var(--ink-mid); }
+
+  .use-case-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .use-case-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--text-main);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .use-case-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.9;
+  }
+
+  .deliverables-list {
+    margin-top: 48px;
+    border: 1px solid var(--rule);
+  }
+
+  .deliverable-row {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--rule);
+    transition: background 0.15s;
+  }
+
+  .deliverable-row:last-child { border-bottom: none; }
+  .deliverable-row:hover { background: var(--ink-mid); }
+
+  .deliverable-check {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-dim);
+    margin-top: 2px;
+  }
+
+  .deliverable-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .deliverable-text strong {
+    display: block;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+
+  /* ── YOUTUBE PAGE ── */
+  .yt-hero {
+    padding: 160px 48px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .yt-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+  }
+
+  .yt-metric {
+    background: var(--ink);
+    padding: 36px 28px;
+    transition: background 0.2s;
+  }
+
+  .yt-metric:hover { background: var(--ink-mid); }
+
+  .yt-metric-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--text-main);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .yt-metric-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .yt-metric-desc {
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  .script-types {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 48px;
+  }
+
+  .script-type {
+    background: var(--ink);
+    padding: 48px 40px;
+    transition: background 0.2s;
+  }
+
+  .script-type:hover { background: var(--ink-mid); }
+
+  .script-type-label {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .script-type-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text-main);
+    margin-bottom: 20px;
+  }
+
+  .script-type-desc {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.9;
+    margin-bottom: 24px;
+  }
+
+  .script-type-detail {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    border-left: 1px solid var(--rule-strong);
+    padding-left: 16px;
+    line-height: 1.8;
   }
 
   /* ── CONTACT ── */
@@ -582,22 +977,17 @@
     align-items: start;
   }
 
-  .contact-detail {
-    margin-bottom: 20px;
-  }
+  .contact-detail { margin-bottom: 20px; }
 
   .contact-detail-label {
-    font-size: 11px;
+    font-size: 9px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--gold-dim);
     margin-bottom: 6px;
   }
 
-  .contact-detail-value {
-    font-size: 13px;
-    color: var(--text-main);
-  }
+  .contact-detail-value { font-size: 13px; color: var(--text-main); }
 
   .contact-detail-value a {
     color: var(--gold);
@@ -605,9 +995,7 @@
     transition: color 0.2s;
   }
 
-  .contact-detail-value a:hover {
-    color: var(--gold-pale);
-  }
+  .contact-detail-value a:hover { color: var(--gold-pale); }
 
   .contact-note {
     font-family: 'Cormorant Garamond', serif;
@@ -640,7 +1028,7 @@
   }
 
   .footer-copy {
-    font-size: 14px;
+    font-size: 10px;
     color: var(--text-dim);
     letter-spacing: 0.05em;
     text-align: center;
@@ -648,7 +1036,7 @@
   }
 
   .footer-disclaimer {
-    font-size: 11px;
+    font-size: 9px;
     color: var(--text-dim);
     letter-spacing: 0.05em;
     text-align: right;
@@ -668,6 +1056,8 @@
   .fade-up:nth-child(2) { animation-delay: 0.25s; }
   .fade-up:nth-child(3) { animation-delay: 0.4s; }
   .fade-up:nth-child(4) { animation-delay: 0.55s; }
+  .fade-up:nth-child(5) { animation-delay: 0.7s; }
+  .fade-up:nth-child(6) { animation-delay: 0.85s; }
 
   @keyframes fadeUp {
     to { opacity: 1; transform: translateY(0); }
@@ -679,10 +1069,7 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -690,19 +1077,29 @@
     .nav-links { display: none; }
     .hero { padding: 100px 24px 60px; }
     section { padding: 64px 24px; }
-    .lang-grid { grid-template-columns: 1fr; }
-    .lang-column:first-child { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 32px; }
-    .lang-column:last-child { padding-left: 0; padding-top: 32px; }
+    .verify-grid { grid-template-columns: 1fr; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
     .process-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
     .process-steps::before { display: none; }
     .contact-inner { grid-template-columns: 1fr; gap: 40px; }
     footer { flex-direction: column; gap: 20px; text-align: center; padding: 32px 24px; }
     .footer-disclaimer { text-align: center; }
+    .use-cases { grid-template-columns: 1fr; }
+    .script-types { grid-template-columns: 1fr; }
+    .yt-metrics { grid-template-columns: 1fr 1fr; }
+    .variant-row { grid-template-columns: 1fr; }
+    .variant-lang { border-right: none; border-bottom: 1px solid var(--rule); }
+    .b2b-hero { padding: 120px 24px 60px; }
+    .yt-hero { padding: 120px 24px 60px; }
+    .bundle-callout { grid-template-columns: 1fr; }
+    .positioning-block { padding: 32px 24px; }
+    .hero-credibility { gap: 0; }
+    .cred-item { padding: 4px 10px; font-size: 8px; }
   }
 
   @media (max-width: 480px) {
     .pricing-grid { grid-template-columns: 1fr; }
+    .yt-metrics { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -710,14 +1107,17 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">GK Media</a>
+  <span class="nav-logo" onclick="showPage('home')">GK Media</span>
   <ul class="nav-links">
-    <li><a href="#languages">Languages</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#process">Process</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><button onclick="showPage('home')" id="nav-home" class="nav-active">Home</button></li>
+    <li><button onclick="showPage('b2b')" id="nav-b2b">B2B</button></li>
+    <li><button onclick="showPage('youtube')" id="nav-youtube">Documentary Scripts</button></li>
+    <li><a href="#contact-section">Contact</a></li>
   </ul>
 </nav>
+
+<!-- ═══════════════════════════════════════════════ HOME PAGE ═══ -->
+<div class="page active" id="page-home">
 
 <!-- HERO -->
 <div class="hero">
@@ -727,17 +1127,28 @@
   </div>
   <div class="hero-rule-left"></div>
   <div class="hero-inner">
-    <div class="hero-eyebrow fade-up">Narrative That Connects</div>
+    <div class="hero-eyebrow fade-up">GK Media · Editorial Production</div>
     <h1 class="hero-title fade-up">Technical Content.<br><em>Any Language.</em><br>48 Hours.</h1>
-    <p class="hero-tagline fade-up">Documentary scripts. B2B content. Multilingual production.</p>
+
+    <div class="hero-credibility fade-up">
+      <span class="cred-item">Source-Verified</span>
+      <span class="cred-item">Plagiarism Scanned</span>
+      <span class="cred-item">Researched</span>
+      <span class="cred-item">Claim-Tabled</span>
+      <span class="cred-item">Author-Directed</span>
+    </div>
+
     <p class="hero-claim fade-up">
       We do not translate.<br>
-      We <strong>create directly</strong> in 15+ languages — including rare variants.<br>
-      Human-directed. Source-backed. Ready to publish.
+      We <strong>create directly</strong> in 15+ languages — including regional variants.<br>
+      Author-directed editorial production against source-verified research.
     </p>
     <div class="hero-ctas fade-up">
-      <a href="mailto:research@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial</a>
-      <a href="https://drive.google.com/file/d/1HRyxN_MJoppKdcyYCivDJq6xPzxVwUXt/view" target="_blank" class="btn-ghost">Request Sample</a>
+      <a href="mailto:contact@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial</a>
+      <a href="https://drive.google.com/file/d/1HRyxN_MJoppKdcyYCivDJq6xPzxVwUXt/view" target="_blank" class="btn-ghost">View Sample Bundle</a>
+    </div>
+    <div class="hero-ctas-secondary fade-up">
+      <a href="https://drive.google.com/file/d/1kuI_twpZEO4WlkmboLWmeDQ21XOAh_a0/view?usp=sharing" target="_blank" class="btn-secondary-link">Read Industry Position Paper →</a>
     </div>
   </div>
   <div class="scroll-hint">Scroll</div>
@@ -745,42 +1156,104 @@
 
 <div class="divider"></div>
 
+<!-- HOW WE VERIFY -->
+<section id="verify">
+  <div class="section-label reveal">Verification</div>
+  <h2 class="section-title reveal">How we verify.<br><em>Every commission.</em></h2>
+  <div class="verify-grid reveal">
+    <div class="verify-card">
+      <div class="verify-num">01</div>
+      <div class="verify-title">Named, dated, linkable sources</div>
+      <div class="verify-desc">Every load-bearing claim ships with a named source, publication date, and direct link. No floating statistics. No anonymous citations. If we cannot source a claim, we do not make it.</div>
+    </div>
+    <div class="verify-card">
+      <div class="verify-num">02</div>
+      <div class="verify-title">Plagiarism scan under 15% match</div>
+      <div class="verify-desc">Each commission is scanned before delivery. We hold to a hard threshold of under 15% match. The scan result is available on request. We do not use "plagiarism-free" as a phrase; we use the number.</div>
+    </div>
+    <div class="verify-card">
+      <div class="verify-num">03</div>
+      <div class="verify-title">Claim table on request</div>
+      <div class="verify-desc">We maintain an internal claim table mapping every factual statement in the script to its source. Buyers who require an audit trail for compliance, editorial, or legal review can request the full table at any point.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- LANGUAGES -->
 <section id="languages">
   <div class="section-label reveal">Languages</div>
   <h2 class="section-title reveal">Direct creation,<br><em>not translation.</em></h2>
-  <div class="lang-grid reveal">
-    <div class="lang-column">
-      <div class="lang-col-label">Standard</div>
-      <div class="lang-list">
-        <span class="lang-tag">English</span>
-        <span class="lang-tag">German</span>
-        <span class="lang-tag">Dutch</span>
-        <span class="lang-tag">Flemish</span>
-        <span class="lang-tag">French (Parisian)</span>
-        <span class="lang-tag">French (Québec)</span>
-        <span class="lang-tag">Spanish (EU)</span>
-        <span class="lang-tag">Spanish (LATAM)</span>
-        <span class="lang-tag">Portuguese (EU)</span>
-        <span class="lang-tag">Portuguese (BR)</span>
-        <span class="lang-tag">Hindi</span>
-        <span class="lang-tag">Japanese</span>
-        <span class="lang-tag">Mandarin</span>
-        <span class="lang-tag">Arabic</span>
-        <span class="lang-tag">Swahili</span>
-        <span class="lang-tag">Norwegian</span>
-      </div>
+  <p class="lang-intro reveal">We do not produce a master draft and translate it. Each language version is created independently, carrying the register, vocabulary, and idiomatic structure of its target market. The same topic reads differently in Austrian Standarddeutsch and Swiss Hochdeutsch. We hold that distinction.</p>
+
+  <div class="reveal">
+    <div class="lang-section-title">European</div>
+    <div class="lang-list-full">
+      <span class="lang-tag">English</span>
+      <span class="lang-tag">German (Bundesdeutsch)</span>
+      <span class="lang-tag variant">Austrian Standarddeutsch</span>
+      <span class="lang-tag variant">Swiss Hochdeutsch</span>
+      <span class="lang-tag">French (Parisian)</span>
+      <span class="lang-tag variant">Québec French</span>
+      <span class="lang-tag">Spanish (Castilian)</span>
+      <span class="lang-tag variant">Mexican Spanish</span>
+      <span class="lang-tag variant">Catalan</span>
+      <span class="lang-tag">Dutch (Standard)</span>
+      <span class="lang-tag variant">Flemish / Belgisch-Nederlands</span>
+      <span class="lang-tag">Italian</span>
+      <span class="lang-tag">Portuguese (European)</span>
+      <span class="lang-tag variant">Portuguese (Brazilian)</span>
+      <span class="lang-tag">Norwegian</span>
     </div>
-    <div class="lang-column">
-      <div class="lang-col-label">Rare & Minority</div>
-      <div class="lang-list">
-        <span class="lang-tag rare">Swiss German</span>
-        <span class="lang-tag rare">West Frisian</span>
-        <span class="lang-tag rare">Haitian Creole</span>
-        <span class="lang-tag rare">Lombard</span>
-        <span class="lang-tag rare">Sanskrit (Classical)</span>
-        <span class="lang-tag rare">Hinglish</span>
-      </div>
+
+    <div class="lang-section-title">Middle East &amp; Asia</div>
+    <div class="lang-list-full">
+      <span class="lang-tag">Arabic</span>
+      <span class="lang-tag">Japanese</span>
+      <span class="lang-tag">Mandarin</span>
+      <span class="lang-tag">Hindi</span>
+      <span class="lang-tag">Korean</span>
+    </div>
+
+    <div class="lang-section-title">African &amp; Other</div>
+    <div class="lang-list-full">
+      <span class="lang-tag">Swahili</span>
+    </div>
+
+    <div class="lang-note">Solid border = standard national variety. Dashed border = regional variant or minority register. Variant tags indicate distinct vocabulary, rhythm, and regulatory anchoring from the standard form.</div>
+  </div>
+</section>
+
+<!-- VERIFIED VARIANTS TABLE -->
+<section style="padding-top: 0;">
+  <div class="section-label reveal">Verified Variants</div>
+  <p class="lang-intro reveal">Regional variants are tested against specific regulatory and lexical anchors. These are not stylistic variations — they reflect distinct commercial and legal environments.</p>
+
+  <div class="variant-table reveal">
+    <div class="variant-row">
+      <div class="variant-lang">Québec French</div>
+      <div class="variant-anchor"><code>Loi 96</code> Loi sur la langue officielle. Distinct from Parisian French in register, opening structure, and lexical set — verified against native business depth.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-lang">Mexican Spanish</div>
+      <div class="variant-anchor"><code>NOM-024-SCFI</code> Commercial labelling standard. Vocabulary and rhythm distinct from Castilian; jersey hook verified in opening construction.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-lang">Catalan</div>
+      <div class="variant-anchor"><code>Llei 1/1998</code> Policy on linguistic normalisation. Register held at native business depth, distinct from Castilian Spanish throughout.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-lang">Flemish / Belgisch-Nederlands</div>
+      <div class="variant-anchor"><code>Mediafin €217.5M</code> Swap anchor. Belgian Standard Dutch with identifiable markers. Honest disclosure: depth verified for B2B documentary register, not general consumer copy.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-lang">Swiss Hochdeutsch</div>
+      <div class="variant-anchor"><code>NZZ-style register</code> Bundesdeutsch verkauft in Zürich nicht — Helvetisms correct and tested. Distinct from Austrian and German Bundesdeutsch in rhythm and vocabulary.</div>
+    </div>
+    <div class="variant-row">
+      <div class="variant-lang">Austrian Standarddeutsch</div>
+      <div class="variant-anchor"><code>ORF/ZDF-equivalent register</code> Spital, Handygeschäft, Pappbecher, Radständer — register holds. Verified in documentary script format.</div>
     </div>
   </div>
 </section>
@@ -797,36 +1270,46 @@
       <div class="pricing-amount free">Free</div>
       <div class="pricing-period">No obligation</div>
       <div class="pricing-rule"></div>
-      <div class="pricing-desc">500 words, one language. Delivered within 48 hours. No strings attached.</div>
+      <div class="pricing-desc">500 words, one language. Delivered within 48 hours. Includes source basis. No strings attached.</div>
     </div>
     <div class="pricing-card">
       <div class="pricing-tier">Standard</div>
-      <div class="pricing-amount">$700<span style="font-size:18px">–900</span></div>
-      <div class="pricing-period">Per commission</div>
+      <div class="pricing-amount">$300<span style="font-size:18px">–500</span></div>
+      <div class="pricing-period">Per commission · one language</div>
       <div class="pricing-rule"></div>
-      <div class="pricing-desc">Full production bundle in one language. Script, source basis, derivatives, rights note.</div>
+      <div class="pricing-desc">Full production bundle. Script, source basis, derivatives, rights note. Plagiarism scan included.</div>
     </div>
     <div class="pricing-card featured">
       <div class="pricing-tier">Multilingual</div>
-      <div class="pricing-amount">$1,200<span style="font-size:18px">–2,000</span></div>
+      <div class="pricing-amount">$700<span style="font-size:18px">–1,200</span></div>
       <div class="pricing-period">Up to 3 languages</div>
       <div class="pricing-rule"></div>
-      <div class="pricing-desc">Full bundle across three language markets. Same narrative, distinct creation for each.</div>
+      <div class="pricing-desc">Full bundle across three language markets. Same narrative, distinct creation for each. Claim table available on request.</div>
     </div>
     <div class="pricing-card">
       <div class="pricing-tier">Retainer</div>
-      <div class="pricing-amount">$3k<span style="font-size:18px">–10k</span></div>
+      <div class="pricing-amount">$1,500<span style="font-size:18px">–4,000</span></div>
       <div class="pricing-period">Per month</div>
       <div class="pricing-rule"></div>
-      <div class="pricing-desc">Ongoing pipeline. Priority turnaround. Dedicated editorial capacity.</div>
+      <div class="pricing-desc">Ongoing pipeline. Priority turnaround. Dedicated editorial capacity across your full language set.</div>
     </div>
   </div>
+
+  <div class="bundle-callout reveal" style="margin-top: 32px;">
+    <div class="bundle-callout-text">
+      <strong>Multi-language bundle work (5+ languages) — from $2,500</strong>
+      Commissions spanning five or more languages — including the 17-language enterprise format — are scoped and quoted individually. Language count, rights structure, and turnaround all affect the investment. Email to begin scoping.
+    </div>
+    <a href="mailto:contact@gkmedia.online?subject=Bundle%20quote%20request" class="btn-ghost">Get Bundle Quote</a>
+  </div>
+
+  <p class="pricing-note reveal">All tiers include: named, dated, linkable sources for every load-bearing claim · plagiarism scan under 15% match · production notes · rights and usage notation. Claim table mapping available on request at all tiers.</p>
 </section>
 
 <!-- TRIAL BAND -->
 <div class="trial-band reveal">
-  <p>No obligation. Email us your topic and target language.<br>We deliver within 48 hours — free.</p>
-  <a href="mailto:research@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial →</a>
+  <p>No obligation. Email us your topic and target language. We deliver a 500-word sample within 48 hours — free. Includes source basis.</p>
+  <a href="mailto:contact@gkmedia.online?subject=Free%20trial%20request" class="btn-primary">Start Free Trial →</a>
 </div>
 
 <!-- PROCESS -->
@@ -837,22 +1320,22 @@
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-title">Brief</div>
-      <div class="step-desc">Topic, language, audience, and format. We scope it in one exchange.</div>
+      <div class="step-desc">Topic, language, audience, format. We scope it in one exchange and confirm sources available before starting.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
-      <div class="step-title">Production</div>
-      <div class="step-desc">Research, sourcing, and direct creation. Not translated from a master draft.</div>
+      <div class="step-title">Research</div>
+      <div class="step-desc">Source identification, claim verification, and regulatory anchoring. No draft starts without named sources confirmed.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
-      <div class="step-title">Review</div>
-      <div class="step-desc">Editorial and factual pass. Claim table checked. Production notes attached.</div>
+      <div class="step-title">Production</div>
+      <div class="step-desc">Direct creation in the target language. Not translated from a master draft. Editorial direction applied at every stage.</div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-title">Delivery</div>
-      <div class="step-desc">Full bundle delivered within 48 hours. Client-ready, not a draft.</div>
+      <div class="step-desc">Full bundle within 48 hours. Script, source basis, plagiarism scan result, production notes, rights notation.</div>
     </div>
   </div>
 </section>
@@ -860,7 +1343,7 @@
 <div class="divider"></div>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact-section">
   <div class="section-label reveal">Contact</div>
   <div class="contact-inner reveal">
     <div>
@@ -874,7 +1357,7 @@
       </div>
       <div class="contact-detail">
         <div class="contact-detail-label">Email</div>
-        <div class="contact-detail-value"><a href="mailto:research@gkmedia.online">research@gkmedia.online</a></div>
+        <div class="contact-detail-value"><a href="mailto:contact@gkmedia.online">contact@gkmedia.online</a></div>
       </div>
       <div class="contact-detail">
         <div class="contact-detail-label">Website</div>
@@ -882,7 +1365,7 @@
       </div>
     </div>
     <div class="contact-note">
-      For samples, trial packages, or commissions — one email is all it takes. We respond within the business day.
+      For samples, trial packages, bundle quotes, or commissions — one email is all it takes. We respond within the business day.
     </div>
   </div>
 </section>
@@ -891,7 +1374,7 @@
 <footer>
   <div class="footer-logo">GK Media</div>
   <div class="footer-copy">
-    Human-directed. Source-backed. Narrative content.<br>
+    Author-directed. Source-verified. Multilingual production.<br>
     © 2026 GK Media. All rights reserved.
   </div>
   <div class="footer-disclaimer">
@@ -899,19 +1382,424 @@
   </div>
 </footer>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+</div><!-- /page-home -->
 
-  reveals.forEach(el => observer.observe(el));
+
+<!-- ═══════════════════════════════════════════════ B2B PAGE ═══ -->
+<div class="page" id="page-b2b">
+
+<div class="b2b-hero">
+  <div class="b2b-hero-eyebrow fade-up">B2B Content Production</div>
+  <h1 class="b2b-title fade-up">Compliance and market-entry content<br>for <em>any market your business enters.</em></h1>
+  <p class="b2b-lead fade-up">Compliance documents, white papers, regulatory briefings, and market-entry content — produced directly in the language of the buyer, not translated from English. Every commission ships with named sources, a plagiarism scan result, and a claim table available on request.</p>
+  <div class="hero-ctas fade-up">
+    <a href="mailto:contact@gkmedia.online?subject=B2B%20commission%20enquiry" class="btn-primary">Discuss a Commission</a>
+    <a href="https://drive.google.com/file/d/1HRyxN_MJoppKdcyYCivDJq6xPzxVwUXt/view" target="_blank" class="btn-ghost">View Sample Bundle</a>
+  </div>
+  <div class="hero-ctas-secondary fade-up">
+    <a href="https://drive.google.com/file/d/1kuI_twpZEO4WlkmboLWmeDQ21XOAh_a0/view?usp=sharing" target="_blank" class="btn-secondary-link">Read Industry Position Paper →</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">Use Cases</div>
+  <h2 class="section-title reveal">What B2B buyers<br><em>commission us for.</em></h2>
+  <div class="use-cases reveal">
+    <div class="use-case">
+      <div class="use-case-label">Market Entry</div>
+      <div class="use-case-title">Regulatory &amp; compliance content</div>
+      <div class="use-case-desc">Content anchored to local regulatory frameworks — not adapted from a generic English version. Written to the vocabulary of the actual statute or standard, in the market's own register.</div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-label">Thought Leadership</div>
+      <div class="use-case-title">White papers &amp; position documents</div>
+      <div class="use-case-desc">Long-form analytical content for industry audiences. Source-verified, claim-tabled, and delivered in the register expected by the trade press or procurement committee reading it.</div>
+    </div>
+    <div class="use-case">
+      <div class="use-case-label">Enterprise</div>
+      <div class="use-case-title">Multi-language bundles</div>
+      <div class="use-case-desc">The same commission across five to seventeen language markets. Each version created independently, not translated. Regulatory anchors and vocabulary verified per market. Quoted individually above five languages.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">What Ships</div>
+  <h2 class="section-title reveal">Every commission.<br><em>Every time.</em></h2>
+  <div class="deliverables-list reveal">
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Final script or document</strong>
+        Created directly in the target language. Production-ready. Not a draft.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Source basis</strong>
+        Named, dated, and linkable sources for every load-bearing claim. Buyers can verify each one independently.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Plagiarism scan result — under 15% match</strong>
+        Hard threshold. The result is available with every delivery. We do not use the phrase "100% original." We use the number.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Claim table on request</strong>
+        Every factual statement in the document mapped to its source. Provided for compliance, editorial, or legal review at any tier.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Production notes</strong>
+        Register decisions, tone anchors, and any variant-specific choices documented for your editorial team.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Rights and usage note</strong>
+        Clear statement of what you own and how it can be used. No ambiguity on derivative rights.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">Pricing</div>
+  <h2 class="section-title reveal">B2B investment.<br><em>Scoped per commission.</em></h2>
+  <div class="pricing-grid reveal">
+    <div class="pricing-card">
+      <div class="pricing-tier">Trial</div>
+      <div class="pricing-amount free">Free</div>
+      <div class="pricing-period">500 words, one language</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Delivered within 48 hours with source basis. Sufficient to evaluate register, sourcing discipline, and delivery quality.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Standard</div>
+      <div class="pricing-amount">$300<span style="font-size:18px">–500</span></div>
+      <div class="pricing-period">Per commission · one language</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Full production bundle in one language. Source basis, plagiarism scan, production notes, rights note included.</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Multilingual</div>
+      <div class="pricing-amount">$700<span style="font-size:18px">–1,200</span></div>
+      <div class="pricing-period">Up to 3 languages</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Full bundle across three language markets. Each version independently created. Claim table available on request.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Bundle</div>
+      <div class="pricing-amount">From $2,500</div>
+      <div class="pricing-period">5+ languages</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Five to seventeen language markets. Quoted on language count, rights structure, and turnaround. Email to scope.</div>
+    </div>
+  </div>
+  <p class="pricing-note reveal">All tiers: named sources · plagiarism scan under 15% · production notes · rights notation. Claim table on request.</p>
+</section>
+
+<div class="trial-band reveal">
+  <p>One email starts the process. Tell us the topic, the language market, and the audience. We scope it the same day.</p>
+  <a href="mailto:contact@gkmedia.online?subject=B2B%20commission%20enquiry" class="btn-primary">Start the Conversation →</a>
+</div>
+
+<section id="contact-section-b2b">
+  <div class="section-label reveal">Contact</div>
+  <div class="contact-inner reveal">
+    <div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Name</div>
+        <div class="contact-detail-value">Karan Kohli</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Title</div>
+        <div class="contact-detail-value">Editorial Director, GK Media</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value"><a href="mailto:contact@gkmedia.online">contact@gkmedia.online</a></div>
+      </div>
+    </div>
+    <div class="contact-note">
+      B2B commissions, enterprise bundle quotes, and position paper requests — we respond within the business day.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GK Media</div>
+  <div class="footer-copy">
+    Author-directed. Source-verified. Multilingual production.<br>
+    © 2026 GK Media. All rights reserved.
+  </div>
+  <div class="footer-disclaimer">
+    Content involving legal, medical, financial, or regulated topics should be reviewed by the client's qualified subject-matter expert before publication.
+  </div>
+</footer>
+
+</div><!-- /page-b2b -->
+
+
+<!-- ══════════════════════════════════════ YOUTUBE SCRIPTS PAGE ═══ -->
+<div class="page" id="page-youtube">
+
+<div class="yt-hero">
+  <div class="b2b-hero-eyebrow fade-up">Documentary Script Production</div>
+  <h1 class="b2b-title fade-up">Scripts built for<br><em>watch time, not word count.</em></h1>
+  <p class="b2b-lead fade-up">Source-verified. Plagiarism scanned. Faceless or presenter-led. In any language your channel operates.</p>
+  <div class="hero-ctas fade-up">
+    <a href="mailto:contact@gkmedia.online?subject=Documentary%20script%20commission" class="btn-primary">Commission a Script</a>
+  </div>
+  <div class="hero-ctas fade-up" style="margin-top: 16px;">
+    <a href="https://drive.google.com/file/d/1QRE2VQtajeuzbNY_gLpG534s0G1jOnKd/view?usp=sharing" target="_blank" class="btn-ghost">Faceless Sample (Dutch)</a>
+    <a href="https://drive.google.com/file/d/1gRXrTHU_avbMDtj7iBJCUdhJ9yl3Ets9/view?usp=sharing" target="_blank" class="btn-ghost">Presenter-Led Sample (English)</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">What We Build For</div>
+  <h2 class="section-title reveal">Structure first.<br><em>Every time.</em></h2>
+  <div class="yt-metrics reveal">
+    <div class="yt-metric">
+      <div class="yt-metric-num">:00</div>
+      <div class="yt-metric-label">Cold open</div>
+      <div class="yt-metric-desc">Named fact, not a concept. A real person, event, date, or number — never "have you ever wondered."</div>
+    </div>
+    <div class="yt-metric">
+      <div class="yt-metric-num">61%</div>
+      <div class="yt-metric-label">30-second retention</div>
+      <div class="yt-metric-desc">The benchmark our named-fact opens are written to hit. Verified against early channel data on energy topics.</div>
+    </div>
+    <div class="yt-metric">
+      <div class="yt-metric-num">3:04</div>
+      <div class="yt-metric-label">AVD anchor</div>
+      <div class="yt-metric-desc">Subscription ask placed at this benchmark. Positioned after the argument lands, before the close.</div>
+    </div>
+    <div class="yt-metric">
+      <div class="yt-metric-num">48h</div>
+      <div class="yt-metric-label">Turnaround</div>
+      <div class="yt-metric-desc">Full production bundle. Not a draft. Client-ready on delivery.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">Script Types</div>
+  <h2 class="section-title reveal">Two formats.<br><em>One standard.</em></h2>
+  <div class="script-types reveal">
+    <div class="script-type">
+      <div class="script-type-label">Faceless Documentary</div>
+      <div class="script-type-title">Systems, history,<br>and investigation</div>
+      <div class="script-type-desc">Geopolitics, energy, corporate history, financial systems, industrial accidents. The format where authority comes from sourcing and structure, not a presenter. No filler. No explaining voice. No authored lines that sound composed rather than observed.</div>
+      <div class="script-type-detail">
+        Cold open: named fact, not concept<br>
+        Part 4: one concrete retail or procurement scene<br>
+        Reveal architecture: helical, not introductory<br>
+        Source basis included with every script
+      </div>
+    </div>
+    <div class="script-type">
+      <div class="script-type-label">Multilingual</div>
+      <div class="script-type-title">Same channel,<br>multiple markets</div>
+      <div class="script-type-desc">The same script produced independently in English, German, Japanese, and Spanish — not translated. Each version carries the register of its language community. Each version is plagiarism-scanned separately. Each version ships with its own source basis.</div>
+      <div class="script-type-detail">
+        Verified language variants available<br>
+        Austrian, Swiss, and Belgian registers distinct<br>
+        Québec French and Mexican Spanish distinct<br>
+        Up to 3 languages: $700–1,200 / 5+: from $2,500
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">What Ships</div>
+  <h2 class="section-title reveal">The full bundle.<br><em>Not just the script.</em></h2>
+  <div class="deliverables-list reveal">
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Production-ready script</strong>
+        Formatted for voiceover and editing. Word count within 5% of target. No placeholders.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Source basis</strong>
+        Named, dated, linkable sources for every load-bearing claim. Every statistic has a receipt.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Plagiarism scan — under 15% match</strong>
+        Hard threshold. Result available on delivery. We use the number, not the phrase.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Production notes</strong>
+        B-roll suggestions, visual structure notes (Household / Retail / System lanes), pacing markers.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Derivatives</strong>
+        Short-form adaptation, description copy, and chapter markers on request.
+      </div>
+    </div>
+    <div class="deliverable-row">
+      <div class="deliverable-check">—</div>
+      <div class="deliverable-text">
+        <strong>Claim table on request</strong>
+        Every factual statement mapped to its source. Available at any tier for channel compliance or editorial review.
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section>
+  <div class="section-label reveal">Pricing</div>
+  <h2 class="section-title reveal">Script investment.<br><em>No hidden scope.</em></h2>
+  <div class="pricing-grid reveal">
+    <div class="pricing-card">
+      <div class="pricing-tier">Trial</div>
+      <div class="pricing-amount free">Free</div>
+      <div class="pricing-period">500 words, one language</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Enough to evaluate cold open quality, sourcing discipline, and structural approach. Delivered within 48 hours.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Single Script</div>
+      <div class="pricing-amount">$300<span style="font-size:18px">–500</span></div>
+      <div class="pricing-period">Per commission · one language</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Full production bundle. Script, source basis, plagiarism scan, production notes, derivatives, rights note.</div>
+    </div>
+    <div class="pricing-card featured">
+      <div class="pricing-tier">Multilingual</div>
+      <div class="pricing-amount">$700<span style="font-size:18px">–1,200</span></div>
+      <div class="pricing-period">Up to 3 languages</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Same script, three language markets, each independently created. Full bundle per language. Claim table on request.</div>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-tier">Retainer</div>
+      <div class="pricing-amount">$1,500<span style="font-size:18px">–4,000</span></div>
+      <div class="pricing-period">Per month</div>
+      <div class="pricing-rule"></div>
+      <div class="pricing-desc">Ongoing channel pipeline. Priority turnaround. Consistent editorial voice across all scripts and languages.</div>
+    </div>
+  </div>
+  <p class="pricing-note reveal">5+ language commissions quoted individually. All tiers include named sources, plagiarism scan under 15%, production notes, and rights notation.</p>
+</section>
+
+<div class="trial-band reveal">
+  <p>Tell us the topic, the target language, and your channel's existing style. We return a 500-word sample within 48 hours — free.</p>
+  <a href="mailto:contact@gkmedia.online?subject=Documentary%20script%20trial" class="btn-primary">Start Free Trial →</a>
+</div>
+
+<section id="contact-section-yt">
+  <div class="section-label reveal">Contact</div>
+  <div class="contact-inner reveal">
+    <div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Name</div>
+        <div class="contact-detail-value">Karan Kohli</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Title</div>
+        <div class="contact-detail-value">Editorial Director, GK Media</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value"><a href="mailto:contact@gkmedia.online">contact@gkmedia.online</a></div>
+      </div>
+    </div>
+    <div class="contact-note">
+      Script commissions, retainer discussions, and multilingual channel enquiries — we respond within the business day.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GK Media</div>
+  <div class="footer-copy">
+    Author-directed. Source-verified. Multilingual production.<br>
+    © 2026 GK Media. All rights reserved.
+  </div>
+  <div class="footer-disclaimer">
+    Content involving legal, medical, financial, or regulated topics should be reviewed by the client's qualified subject-matter expert before publication.
+  </div>
+</footer>
+
+</div><!-- /page-youtube -->
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('nav-active'));
+    const btn = document.getElementById('nav-' + id);
+    if (btn) btn.classList.add('nav-active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    // Re-trigger reveals on the newly shown page
+    initReveals();
+  }
+
+  function initReveals() {
+    const reveals = document.querySelectorAll('.page.active .reveal:not(.visible)');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  }
+
+  // Initial load
+  initReveals();
+
+  // Handle hash links for contact sections
+  document.querySelectorAll('a[href="#contact-section"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      showPage('home');
+      setTimeout(() => {
+        document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    });
+  });
 </script>
 </body>
 </html>
